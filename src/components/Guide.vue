@@ -1,9 +1,9 @@
 <template>
   <div>
-    <home v-if="guides[0].select"></home>
-    <message v-if="guides[1].select"></message>
-    <explore v-if="guides[2].select"></explore>
-    <mine v-if="guides[3].select"></mine>
+    <home class="body" v-if="guides[0].select"></home>
+    <message class="body" v-if="guides[1].select"></message>
+    <explore class="body" v-if="guides[2].select"></explore>
+    <mine class="body" v-if="guides[3].select"></mine>
     <tabbar @on-index-change="indexChange">
       <tabbar-item :selected="guides[0].select" :show-dot="guides[0].showDot">
         <img slot="icon" src="../assets/nav/icon_nav_button.png">
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 import { Tabbar, TabbarItem } from 'vux'
 import Home from './Home/Home'
 import Explore from './Explore/Explore'
@@ -42,15 +42,23 @@ export default {
     Message,
     Mine
   },
-  computed: mapGetters([
-    'guides'
-  ]),
-  methods: mapActions([
-    'indexChange'
-  ])
+
+  computed: {
+    ...mapState({
+      guides: state => state.home.guides
+    })
+  },
+
+  methods: {
+    ...mapActions([
+      'indexChange'
+    ])
+  }
 }
 </script>
 
 <style>
-
+.body {
+  margin-bottom: 10em
+}
 </style>

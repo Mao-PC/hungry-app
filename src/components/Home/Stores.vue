@@ -1,16 +1,22 @@
 <template>
   <div>
-    <img src="" alt="">
+    <template>
+      <div>{{goodDate}}</div>
+      <img src="../../assets/home/good.png" alt="商品样图">
+    </template>
   </div>
 </template>
 
 <script>
-import {} from 'vux'
+import {mapState} from 'vuex'
+import { } from 'vux'
 
 export default {
   components: { },
-  data () {
-    return { }
+  computed: {
+    ...mapState({
+      goodDate: state => state.home.goodDate
+    })
   },
   methods: { }
 }

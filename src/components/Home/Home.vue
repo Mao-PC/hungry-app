@@ -21,7 +21,7 @@
       </grid-item>
     </grid>
     <group class="home-msg">
-      <x-input v-model="msg" :show-clear="false" readonly>
+      <x-input :value="msg" :show-clear="false" readonly>
         <template slot="label">
           <x-icon type="android-bulb" size="18px"></x-icon>
           <span> 通知：</span>
@@ -41,24 +41,14 @@
         <div>产品名称</div>
       </grid-item>
     </grid>
-    <div class="good-item" v-for="i in 10" :key="i" >
-    </div>
+    <stores></stores>
   </div>
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex'
 import { Swiper, XButton, Divider, Group, XInput, Grid, GridItem, GroupTitle, Cell } from 'vux'
-
-const imgList = [
-  'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
-  'http://placeholder.qiniudn.com/800x300/FFEF7D/ffffff',
-  'http://placeholder.qiniudn.com/800x300/8AEEB1/ffffff'
-]
-
-const adList = imgList.map((item, index) => ({
-  url: 'javascript:',
-  img: item
-}))
+import Stores from './Stores'
 
 export default {
   components: {
@@ -70,13 +60,14 @@ export default {
     Grid,
     GridItem,
     GroupTitle,
-    Cell
+    Cell,
+    Stores
   },
   beforeCreate () {
     this.$http.get('/home/querygood').then(
       (res) => {
         if (res.ok) {
-          console.log(res.data)
+          this.saveGoodData(res.data)
         }
       }
     )
@@ -88,11 +79,16 @@ export default {
     cell.style.marginTop = 0
     cell.style.backgroundColor = 'rgba(0,0,0, 0.1)'
   },
-  data () {
-    return {
-      ads: adList,
-      msg: '6666666'
-    }
+  computed: {
+    ...mapState({
+      ads: state => state.home.ads,
+      msg: state => state.home.msg
+    })
+  },
+  methods: {
+    ...mapActions({
+      saveGoodData: 'saveGoodData'
+    })
   }
 }
 </script>

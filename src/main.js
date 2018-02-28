@@ -5,7 +5,7 @@ import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import App from './App'
-import store from './store'
+import store from './stores/index'
 import Guide from '@/components/Guide'
 
 Vue.use(VueResource)

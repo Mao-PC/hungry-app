@@ -18,4 +18,7 @@ body {
 .weui-cells {
   margin: 0px !important
 }
+.weui-tabbar {
+  position: fixed !important;
+}
 </style>

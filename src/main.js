@@ -3,14 +3,17 @@
 import Vue from 'vue'
 import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 import App from './App'
-import Home from '@/components/Home'
+import store from './store'
+import Guide from '@/components/Guide'
 
+Vue.use(VueResource)
 Vue.use(VueRouter)
 
 const routes = [{
   path: '/',
-  component: Home
+  component: Guide
 }]
 
 const router = new VueRouter({
@@ -24,5 +27,6 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app-box')

@@ -11,11 +11,11 @@
     <grid :cols="5" class="operation-area">
       <grid-item v-for="i in 10" :key="i">
         <template v-if="i < 10">
-          <img slot="icon" src="../assets/home/operation.png" alt="操作png">
+          <img slot="icon" src="../../assets/home/operation.png" alt="操作png">
           <span slot="label">操作{{i}}</span>
         </template>
         <template v-else>
-          <img slot="icon" src="../assets/home/more.png" alt="更多png">
+          <img slot="icon" src="../../assets/home/more.png" alt="更多png">
           <span slot="label">更多..</span>
         </template>
       </grid-item>
@@ -30,7 +30,7 @@
     </group>
     <group class="sugguts-title">
       <cell title="为您推荐">
-        <span slot="value" style=" right:0">更多</span>
+        <span slot style=" right:0">更多</span>
       </cell>
     </group>
     <grid :cols="3">
@@ -41,8 +41,7 @@
         <div>产品名称</div>
       </grid-item>
     </grid>
-    <div class="good-item" style="width:100%; height:10em; background-color: red; margin-top: 0.5em" v-for="i in 10" :key="i">
-
+    <div class="good-item" v-for="i in 10" :key="i" >
     </div>
   </div>
 </template>
@@ -73,6 +72,15 @@ export default {
     GroupTitle,
     Cell
   },
+  beforeCreate () {
+    this.$http.get('/home/querygood').then(
+      (res) => {
+        if (res.ok) {
+          console.log(res.data)
+        }
+      }
+    )
+  },
   mounted () {
     // style 里的display=flex 失效, 在这里处理
     let cell = document.getElementsByClassName('header')[0].getElementsByClassName('weui-cells')[0]
@@ -91,13 +99,14 @@ export default {
 
 <style lang="less">
 .weui-cells {
-  margin: 0 !important
+  margin: 0 !important;
 }
 .header {
   position: fixed;
   z-index: 2;
+  width: 100%;
   .weui-cells {
-    background-color: rgba(0,0,0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
   }
   .query-area {
     width: 80%;
@@ -108,7 +117,7 @@ export default {
 }
 
 .home-msg {
-  margin-top: 10px
+  margin-top: 10px;
 }
 .sugguts-title {
   width: 100%;
@@ -121,7 +130,14 @@ export default {
   border: 2px solid #ffffff;
   div {
     text-align: center;
-    color: #ffffff
+    color: #ffffff;
   }
+}
+
+.good-items {
+  width: 100%;
+  height: 10em;
+  background-color: red;
+  margin-top: 0.5em;
 }
 </style>

@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 const imgList = [
   'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
   'http://placeholder.qiniudn.com/800x300/FFEF7D/ffffff',
@@ -7,11 +9,11 @@ const imgList = [
 const state = {
   // 导航
   guides: [{
+    select: false, showDot: false
+  }, {
+    select: false, showDot: false
+  }, {
     select: true, showDot: false
-  }, {
-    select: false, showDot: false
-  }, {
-    select: false, showDot: false
   }, {
     select: false, showDot: false
   }],
@@ -39,8 +41,14 @@ const actions = {
     commit('indexChange', index)
   },
   // 存储后台查询商品结果
-  saveGoodData: ({commit}, data) => {
-    commit('saveGoodData', data)
+  saveGoodData: ({commit}) => {
+    Vue.http.get('/home/querygood').then(
+      (res) => {
+        if (res.ok) {
+          commit('saveGoodData', res.data)
+        }
+      }
+    )
   }
 }
 
@@ -57,6 +65,7 @@ const mutations = {
   },
   // 存储后台查询商品结果
   saveGoodData (state, data) {
+    console.log(data)
     state.goodData = data
   }
 }

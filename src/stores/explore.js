@@ -1,10 +1,30 @@
-const state = { }
+import Vue from 'vue'
 
-const getters = { }
+const state = {
+  expData: []
+}
 
-const actions = { }
+const getters = {
+  expData: (state) => { return state.expData }
+}
 
-const mutations = { }
+const actions = {
+  setData: ({commit}) => {
+    Vue.http.get('/explore/queryexplore').then(
+      (res) => {
+        if (res.ok) {
+          commit('setData', res.data)
+        }
+      }
+    )
+  }
+}
+
+const mutations = {
+  setData (state, data) {
+    state.expData = data
+  }
+}
 
 export default {
   state,

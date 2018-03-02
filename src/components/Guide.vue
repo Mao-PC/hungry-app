@@ -59,6 +59,6 @@ export default {
 
 <style>
 .body {
-  margin-bottom: 10em
+  margin-bottom: 3.5em
 }
 </style>

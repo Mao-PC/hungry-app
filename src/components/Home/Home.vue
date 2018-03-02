@@ -63,21 +63,18 @@ export default {
     Cell,
     Stores
   },
-  beforeCreate () {
-    this.$http.get('/home/querygood').then(
-      (res) => {
-        if (res.ok) {
-          this.saveGoodData(res.data)
-        }
-      }
-    )
-  },
   mounted () {
     // style 里的display=flex 失效, 在这里处理
     let cell = document.getElementsByClassName('header')[0].getElementsByClassName('weui-cells')[0]
     cell.style.display = 'flex'
     cell.style.marginTop = 0
     cell.style.backgroundColor = 'rgba(0,0,0, 0.1)'
+    window.addEventListener('scroll', this.homeScroll)
+    // 请求后台数据
+    this.saveGoodData()
+  },
+  data () {
+    return { }
   },
   computed: {
     ...mapState({
@@ -86,6 +83,17 @@ export default {
     })
   },
   methods: {
+    // head区域滚动背景色变化时间
+    homeScroll () {
+      // 当前滚动的距离
+      let h = document.documentElement.scrollTop
+      let cell = document.getElementsByClassName('header')[0].getElementsByClassName('weui-cells')[0]
+      if (h >= 110) { // 修改背景色
+        cell.style.backgroundColor = 'rgba(255, 255, 255, 1)'
+      } else {
+        cell.style.backgroundColor = 'rgba(0,0,0, 0.1)'
+      }
+    },
     ...mapActions({
       saveGoodData: 'saveGoodData'
     })
@@ -101,9 +109,7 @@ export default {
   position: fixed;
   z-index: 2;
   width: 100%;
-  .weui-cells {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+  height: 50px;
   .query-area {
     width: 80%;
   }

@@ -9,12 +9,21 @@ const getters = {
 }
 
 const actions = {
-  setData: ({commit}) => {
-    Vue.http.get('/explore/queryexplore').then(
+  // 初始化页面调用MongoDB获取数据
+  initData: ({dispatch}) => {
+    dispatch('setData')
+  },
+  // 保存数据
+  setData: ({commit}, pageInfo) => {
+    // Vue.http.get('/explore/queryexplore', pageInfo || {pageIndex: 1, pageSize: 5}).then(
+    Vue.http.jsonp('/explore/queryexplore', {pageIndex: 1}).then(
       (res) => {
         if (res.ok) {
           commit('setData', res.data)
         }
+      },
+      (err) => {
+        alert('发生错误 ! \n' + err)
       }
     )
   }

@@ -20,7 +20,7 @@ const storeSchema = mongoose.Schema({
     grade : Number,
     price : Number,
     description : String
-}, {collection: 'store'});
+}, {collection: 'stores'});
 
 const exploreSchema = mongoose.Schema({
     title : String,
@@ -29,7 +29,7 @@ const exploreSchema = mongoose.Schema({
 
 /************** 定义模型Model **************/
 const Models = {
-    store : store.model('store',storeSchema, 'store'),
+    store : store.model('store',storeSchema, 'stores'),
     explore : store.model('explore',exploreSchema, 'explore')
 }
 // const Models = {

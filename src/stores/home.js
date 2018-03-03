@@ -47,6 +47,9 @@ const actions = {
         if (res.ok) {
           commit('saveGoodData', res.data)
         }
+      },
+      (err) => {
+        alert('发生错误 ! \n' + err)
       }
     )
   }
@@ -65,7 +68,6 @@ const mutations = {
   },
   // 存储后台查询商品结果
   saveGoodData (state, data) {
-    console.log(data)
     state.goodData = data
   }
 }

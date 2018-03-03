@@ -73,6 +73,9 @@ export default {
     // 请求后台数据
     this.saveGoodData()
   },
+  destroyed () {
+    window.removeEventListener('scroll', this.homeScroll)
+  },
   data () {
     return { }
   },

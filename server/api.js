@@ -7,7 +7,6 @@ const router = express.Router();
 router.get('/home/querygood',(req,res) => {
     // 通过模型去查找数据库
     models.store.find({}, function (err,data) {
-        console.log(112)
         if (err) {
             res.send(err);
         } else {
@@ -17,6 +16,7 @@ router.get('/home/querygood',(req,res) => {
 });
 
 router.get('/explore/queryexplore',(req,res) => {
+    console.log(req)
     // 通过模型去查找数据库
     models.explore.find({}, function (err,data) {
         if (err) {

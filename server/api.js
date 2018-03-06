@@ -16,15 +16,23 @@ router.get('/home/querygood',(req,res) => {
 });
 
 router.get('/explore/queryexplore',(req,res) => {
-    console.log(req)
-    // 通过模型去查找数据库
-    models.explore.find({}, function (err,data) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send(data);
+    let query = req.query;
+    if (query) {
+        query.pageIndex = query.pageIndex || 1
+        query.pageSize = query.pageSize || 5
+    } else {
+        query = {
+            pageIndex: 1,
+            pageSize: 5
         }
-    });
+    }
+    let skip = query.pageSize * (query.pageIndex-1)
+    // 通过模型去查找数据库
+    let resp = models.explore.find({}).skip(skip).limit(parseInt(query.pageSize))
+    resp.exec((err, data) => {
+        // console.log(data)
+        res.send(data)
+    })
 });
 
 module.exports = router;

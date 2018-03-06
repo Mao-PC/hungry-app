@@ -13,12 +13,16 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import { XHeader } from 'vux'
+import { scrollBottom } from '../../utils/utils'
 
 export default {
   components: { XHeader },
 
   mounted () {
-    this.initData()
+    // 初始化数据
+    this.initData({pageInfo: {pageIndex: 1, pageSize: 5}})
+    // 添加页面的滚动监听
+    scrollBottom()
   },
 
   computed: {

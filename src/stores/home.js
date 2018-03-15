@@ -9,11 +9,11 @@ const imgList = [
 const state = {
   // 导航
   guides: [{
-    select: false, showDot: false
-  }, {
-    select: false, showDot: false
-  }, {
     select: true, showDot: false
+  }, {
+    select: false, showDot: false
+  }, {
+    select: false, showDot: false
   }, {
     select: false, showDot: false
   }],

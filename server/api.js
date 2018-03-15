@@ -30,8 +30,9 @@ router.get('/explore/queryexplore',(req,res) => {
     // 通过模型去查找数据库
     let resp = models.explore.find({}).skip(skip).limit(parseInt(query.pageSize))
     resp.exec((err, data) => {
-        // console.log(data)
         res.send(data)
+        // setTimeout(() => {
+        // }, 1000);
     })
 });
 

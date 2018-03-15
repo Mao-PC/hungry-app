@@ -43,7 +43,7 @@ function getWindowHeight () {
 export const scrollBottom = (action) => {
   window.onscroll = () => {
     if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
-      alert('you are in the bottom!')
+      action()
     }
   }
 }

@@ -5,7 +5,7 @@
 ## Build Setup
 1. 搭建nodeJs环境
 2. 安装MongoDB并启动服务
-3. 执行脚本导入MongoDB数据：
+3. 链接MongoDB服务，执行下列脚本导入MongoDB数据：
 ```bash
 use store
 db.createCollection("explore")
